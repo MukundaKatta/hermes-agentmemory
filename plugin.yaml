@@ -1,0 +1,9 @@
+name: agentmemory
+version: 0.1.0
+description: "agentmemory — pull-model episodic memory with real deletes and audit trace. Drop-in MemoryProvider for Hermes Agent."
+pip_dependencies:
+  - "anthropic>=0.30"
+requires_env: []
+hooks:
+  - on_session_end
+  - on_session_switch
