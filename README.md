@@ -1,5 +1,9 @@
 # hermes-agentmemory
 
+[![test](https://github.com/MukundaKatta/hermes-agentmemory/actions/workflows/test.yml/badge.svg)](https://github.com/MukundaKatta/hermes-agentmemory/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+
 A drop-in [Hermes Agent](https://github.com/NousResearch/hermes-agent) memory plugin built on [agentmemory](https://github.com/MukundaKatta/agentmemory).
 
 Pull-model episodic memory with real deletes and an audit trace. The point: Hermes Agent is good at remembering. This plugin gives it a memory layer that takes deletion seriously.
