@@ -15,17 +15,24 @@ Hermes ships with several first-class memory backends (Mem0, Honcho, Hindsight, 
 
 ## Install
 
-```bash
-# from the Hermes repo root
-mkdir -p plugins/memory/agentmemory
-cp -r path/to/hermes-agentmemory/* plugins/memory/agentmemory/
+This is a **standalone memory plugin**. Hermes Agent stopped accepting new built-in memory providers — see [CONTRIBUTING.md](https://github.com/NousResearch/hermes-agent/blob/main/CONTRIBUTING.md#memory-providers-ship-as-a-standalone-plugin). The official path is to drop the plugin into the user-plugins directory that Hermes discovers automatically.
 
-# activate
+```bash
+# 1. Clone into the user-plugins dir Hermes scans on startup
+git clone https://github.com/MukundaKatta/hermes-agentmemory \
+  "${HERMES_HOME:-$HOME/.hermes}/plugins/agentmemory"
+
+# 2. Install the one Python dep used by the summarizer
+pip install anthropic
+
+# 3. Activate
 hermes config set memory.provider agentmemory
 
-# set Anthropic key for the summarizer
+# 4. Set the Anthropic key the summarizer will use
 export ANTHROPIC_API_KEY=...
 ```
+
+Hermes's `discover_memory_providers()` scans `$HERMES_HOME/plugins/<name>/__init__.py` for any class subclassing `MemoryProvider`, so no extra registration step is needed.
 
 ## Configuration
 
