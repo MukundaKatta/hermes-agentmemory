@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-agentmemory"
+version = "0.1.0"
+description = "Pull-model episodic memory plugin for Hermes Agent. Real deletes, audit trace, BYO Claude."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [{name = "Mukunda Katta"}]
+keywords = ["hermes-agent", "ai-agents", "memory", "agentmemory", "open-source"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "anthropic>=0.30",
+]
+
+[project.urls]
+Repository = "https://github.com/MukundaKatta/hermes-agentmemory"
+Issues = "https://github.com/MukundaKatta/hermes-agentmemory/issues"
+"Library (agentmemory)" = "https://github.com/MukundaKatta/agentmemory"
+"Hermes Agent" = "https://github.com/NousResearch/hermes-agent"
