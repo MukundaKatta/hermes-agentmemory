@@ -19,7 +19,7 @@ from __future__ import annotations
 import math
 import re
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Callable, Optional
 
 
@@ -86,11 +86,7 @@ class EpisodicStore:
             and (until_ts is None or e.ts <= until_ts)
             and (kind is None or e.kind == kind)
         ]
-        if (
-            self.embedder
-            and candidates
-            and candidates[0].embedding is not None
-        ):
+        if self.embedder and candidates and candidates[0].embedding is not None:
             qv = self.embedder(query)
             for e in candidates:
                 e.score = _cosine(qv, e.embedding or [])
@@ -172,16 +168,12 @@ class OnDemandSummarizer:
         system_prompt: Optional[str] = None,
     ):
         if not callable(llm):
-            raise ValueError(
-                "OnDemandSummarizer: `llm` must be callable (str -> str)."
-            )
+            raise ValueError("OnDemandSummarizer: `llm` must be callable (str -> str).")
         self.llm = llm
         self.max_tokens = max_tokens
         self.system_prompt = system_prompt or _DEFAULT_SYSTEM
 
-    def summarize(
-        self, events: list[EpisodicEvent], intent: str
-    ) -> SummaryResult:
+    def summarize(self, events: list[EpisodicEvent], intent: str) -> SummaryResult:
         if not events:
             return SummaryResult(
                 summary="",
@@ -206,8 +198,7 @@ class OnDemandSummarizer:
 
     def _build_prompt(self, events: list[EpisodicEvent], intent: str) -> str:
         block = "\n".join(
-            f"[{i + 1}] ({e.kind} @ ts={e.ts}) {e.text}"
-            for i, e in enumerate(events)
+            f"[{i + 1}] ({e.kind} @ ts={e.ts}) {e.text}" for i, e in enumerate(events)
         )
         return "\n".join(
             [

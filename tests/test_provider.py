@@ -19,7 +19,8 @@ if "agent" not in sys.modules:
     fake_mp = types.ModuleType("agent.memory_provider")
 
     class MemoryProvider:  # minimal stand-in mirroring the real ABC
-        def __init__(self): pass
+        def __init__(self):
+            pass
 
     fake_mp.MemoryProvider = MemoryProvider
     sys.modules["agent"] = fake_agent
@@ -123,6 +124,7 @@ def test_tool_schemas_shape(tmp_path):
 
 if __name__ == "__main__":
     import tempfile
+
     failures = 0
     for fn_name in [k for k in globals() if k.startswith("test_")]:
         fn = globals()[fn_name]

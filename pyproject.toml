@@ -31,3 +31,13 @@ Repository = "https://github.com/MukundaKatta/hermes-agentmemory"
 Issues = "https://github.com/MukundaKatta/hermes-agentmemory/issues"
 "Library (agentmemory)" = "https://github.com/MukundaKatta/agentmemory"
 "Hermes Agent" = "https://github.com/NousResearch/hermes-agent"
+
+[tool.pytest.ini_options]
+# This plugin uses a flat layout: the package's __init__.py sits at the repo
+# root. Without these, pytest tries to import that root __init__.py (which has
+# relative imports) as a standalone module and fails to collect the tests.
+# Scoping collection to tests/ + treating the root as a namespace package lets
+# `python -m pytest` run the same self-contained tests as the CI smoke runner.
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+consider_namespace_packages = true

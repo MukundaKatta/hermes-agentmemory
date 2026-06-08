@@ -45,7 +45,7 @@ Environment variables:
 | Var | Default | Purpose |
 | --- | --- | --- |
 | `ANTHROPIC_API_KEY` | (required) | key for the on-demand summarizer |
-| `AGENTMEMORY_MODEL` | `claude-sonnet-4-5-20251022` | Claude model id |
+| `AGENTMEMORY_MODEL` | `claude-sonnet-4-5` | Claude model id |
 | `AGENTMEMORY_TOP_K` | `5` | events to retrieve per prefetch |
 | `AGENTMEMORY_MAX_TOKENS` | `300` | summary token budget |
 | `AGENTMEMORY_TRACE_LOG` | `$HERMES_HOME/agentmemory/trace.jsonl` | where to append audit records |

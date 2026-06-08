@@ -15,7 +15,7 @@ Design rules (inherited from agentmemory):
 Configuration (env vars):
   AGENTMEMORY_TOP_K          number of past events to retrieve (default 5)
   AGENTMEMORY_MAX_TOKENS     summary token budget per prefetch (default 300)
-  AGENTMEMORY_MODEL          Claude model id (default claude-sonnet-4-5-20251022)
+  AGENTMEMORY_MODEL          Claude model id (default claude-sonnet-4-5)
   AGENTMEMORY_TRACE_LOG      file path to append prefetch trace JSON (default $HERMES_HOME/agentmemory/trace.jsonl)
   ANTHROPIC_API_KEY          Anthropic key for summarizer (required)
 """
@@ -39,7 +39,7 @@ from .agentmemory_py import (
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_MODEL = "claude-sonnet-4-5-20251022"
+DEFAULT_MODEL = "claude-sonnet-4-5"
 
 
 def _make_anthropic_llm(model: str, max_tokens: int):
@@ -65,7 +65,9 @@ def _make_anthropic_llm(model: str, max_tokens: int):
         )
         # join all text blocks
         return "".join(
-            getattr(b, "text", "") for b in resp.content if getattr(b, "type", "") == "text"
+            getattr(b, "text", "")
+            for b in resp.content
+            if getattr(b, "type", "") == "text"
         )
 
     return call
@@ -160,7 +162,9 @@ class AgentMemoryProvider(MemoryProvider):
         )
         return result.summary
 
-    def sync_turn(self, user_content: str, assistant_content: str, *, session_id: str = "") -> None:
+    def sync_turn(
+        self, user_content: str, assistant_content: str, *, session_id: str = ""
+    ) -> None:
         sid = session_id or self._session_id
         if user_content:
             self._store.append(sid, "user", user_content)
